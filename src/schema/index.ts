@@ -1,8 +1,11 @@
 import { validationMetadatasToSchemas } from "class-validator-jsonschema";
 import { getMetadataArgsStorage } from "routing-controllers";
 import { routingControllersToSpec } from "routing-controllers-openapi";
+import { Singleton } from "typescript-ioc";
 
-export function generateApiSpec() {
+type OpenAPIObject = ReturnType<typeof validationMetadatasToSchemas>;
+
+function generateApiSpec() {
   const storage = getMetadataArgsStorage();
   const schemas = validationMetadatasToSchemas({
     refPointerPrefix: "#/components/schemas",
@@ -17,4 +20,17 @@ export function generateApiSpec() {
   });
 
   return spec;
+}
+
+@Singleton
+export class OpenAPIService {
+  spec?: OpenAPIObject;
+
+  public getSpec(): OpenAPIObject {
+    if (!this.spec) {
+      this.spec = generateApiSpec();
+    }
+
+    return this.spec;
+  }
 }
