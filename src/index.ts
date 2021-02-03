@@ -4,4 +4,6 @@ const app = createExpressServer({
   controllers: [`${__dirname}/controllers/**/*.{js,ts}`],
 });
 
-app.listen(3001);
+app.listen(3001, () => {
+  console.log("started");
+});
