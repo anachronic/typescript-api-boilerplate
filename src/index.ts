@@ -1,11 +1,7 @@
-import express from "express";
+import { createExpressServer } from "routing-controllers";
 
-const app = express();
-
-app.get("/", async (req, res) => {
-  res.send({
-    hehe: "haha",
-  });
+const app = createExpressServer({
+  controllers: [`${__dirname}/controllers/**/*.{js,ts}`],
 });
 
 app.listen(3001);
