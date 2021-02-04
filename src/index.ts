@@ -4,6 +4,6 @@ const app = createExpressServer({
   controllers: [`${__dirname}/controllers/**/*.{js,ts}`],
 });
 
-app.listen(3001, () => {
+app.listen(process.env.PORT || 8080, () => {
   console.log("started");
 });

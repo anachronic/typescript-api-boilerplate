@@ -1,0 +1,34 @@
+version: "3.8"
+
+services:
+  db:
+    container_name: app_db
+    image: postgres:latest
+    volumes:
+      - app_db_volume:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=${DATABASE_USER}
+      - POSTGRES_DB=${DATABASE_NAME}
+      - POSTGRES_PASSWORD=${DATABASE_PASSWORD}
+
+  web:
+    container_name: app_backend
+    build: .
+    depends_on:
+      - db
+    ports:
+      - 8004:8080
+    volumes:
+      - /app/node_modules
+      - .:/app
+    environment:
+      - DEBUG
+      - DATABASE_USER
+      - DATABASE_NAME
+      - DATABASE_PASSWORD
+      - DATABASE_PORT
+      - DATABASE_HOST=db
+      - PORT=8080
+
+volumes:
+  app_db_volume:
