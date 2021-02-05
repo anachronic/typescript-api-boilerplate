@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon",
-    "zg": "docker-compose exec web yarn zapatos"
+    "zg": "docker-compose exec web yarn zapatos",
+    "migrate": "node scripts/migrate.js"
   },
   "dependencies": {
     "@types/pg": "^7.14.9",
@@ -14,6 +15,8 @@
     "class-validator-jsonschema": "^2.1.1",
     "env-sanitize": "^2.0.0",
     "express": "^4.17.1",
+    "marv": "^3.1.0",
+    "marv-pg-driver": "^4.0.0",
     "pg": "^8.5.1",
     "routing-controllers": "^0.9.0-alpha.6",
     "routing-controllers-openapi": "^2.2.0",
