@@ -536,6 +536,11 @@ end-of-stream@^1.1.0:
   dependencies:
     once "^1.4.0"
 
+env-sanitize@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/env-sanitize/-/env-sanitize-2.0.0.tgz#79fee5b75101ce994db96966548b00f52316233e"
+  integrity sha512-MItoJS1kA4cO4bCxw3vutQTLHwAgjpgNGE8YsnW3yfif1y7pWkhICEPaXOJQpBlhe9Gs/xu6QXN4EPpnooL0vA==
+
 escape-goat@^2.0.0:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/escape-goat/-/escape-goat-2.1.1.tgz#1b2dc77003676c457ec760b2dc68edb648188675"
