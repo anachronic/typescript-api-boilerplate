@@ -17,5 +17,10 @@ Container.bindName("db").to(pool);
 const logger = winston.createLogger({
   level: "info",
   transports: [new winston.transports.Console()],
+  format: winston.format.combine(
+    winston.format.errors({ stack: true }),
+    winston.format.timestamp(),
+    winston.format.prettyPrint()
+  ),
 });
 Container.bindName("logger").to(logger);
