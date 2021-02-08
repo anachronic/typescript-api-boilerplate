@@ -7,7 +7,7 @@
     "dev": "nodemon",
     "docker": "docker-compose exec web",
     "psql": "docker-compose exec db psql -U db_user db_name",
-    "zg": "yarn docker yarn zapatos",
+    "zg": "yarn docker yarn zapatos && prettier --write src/zapatos/**/*",
     "migrate": "yarn docker yarn prod:migrate",
     "prod:migrate": "node scripts/migrate.js"
   },
