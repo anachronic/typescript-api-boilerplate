@@ -1,3 +1,5 @@
+import "source-map-support/register";
+
 import { createExpressServer } from "routing-controllers";
 import morgan from "morgan";
 import "./startup";
