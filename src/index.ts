@@ -1,5 +1,7 @@
 import { createExpressServer } from "routing-controllers";
 
+import "./startup";
+
 const app = createExpressServer({
   controllers: [`${__dirname}/controllers/**/*.{js,ts}`],
 });
