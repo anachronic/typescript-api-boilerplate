@@ -1,5 +1,4 @@
 import { createExpressServer } from "routing-controllers";
-
 import "./startup";
 
 const app = createExpressServer({
