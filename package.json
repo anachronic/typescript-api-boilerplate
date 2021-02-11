@@ -10,7 +10,7 @@
     "zg": "yarn docker yarn zapatos && prettier --write src/zapatos/**/*",
     "migrate": "yarn docker yarn prod:migrate",
     "prod:migrate": "node scripts/migrate.js",
-    "test": "jest"
+    "test": "NODE_ENV=test jest"
   },
   "dependencies": {
     "@types/pg": "^7.14.9",
