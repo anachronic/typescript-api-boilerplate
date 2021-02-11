@@ -1,39 +1,39 @@
 module.exports = {
   root: true,
-  parser: "@typescript-eslint/parser",
-  plugins: ["@typescript-eslint"],
+  parser: '@typescript-eslint/parser',
+  plugins: ['@typescript-eslint'],
   extends: [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended",
-    "plugin:@typescript-eslint/recommended",
-    "prettier",
+    'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'prettier',
   ],
   env: {
     node: true,
   },
-  ignorePatterns: ["build/**/*"],
+  ignorePatterns: ['build/**/*'],
   overrides: [
     {
-      files: "**/*.js",
+      files: '**/*.js',
       rules: {
-        "@typescript-eslint/no-var-requires": "off",
+        '@typescript-eslint/no-var-requires': 'off',
       },
     },
     {
-      files: "src/**/*.ts",
+      files: 'src/**/*.ts',
       parserOptions: {
-        project: ["tsconfig.json"],
+        project: ['tsconfig.json'],
       },
       rules: {
-        "@typescript-eslint/await-thenable": "error",
-        "@typescript-eslint/no-floating-promises": "error",
+        '@typescript-eslint/await-thenable': 'error',
+        '@typescript-eslint/no-floating-promises': 'error',
       },
     },
     {
-      files: "**/*.ts",
+      files: '**/*.ts',
       rules: {
-        "@typescript-eslint/no-explicit-any": "off",
+        '@typescript-eslint/no-explicit-any': 'off',
       },
     },
   ],
-};
+}

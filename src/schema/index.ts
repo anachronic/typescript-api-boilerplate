@@ -1,36 +1,35 @@
-import { validationMetadatasToSchemas } from "class-validator-jsonschema";
-import { getMetadataArgsStorage } from "routing-controllers";
-import { routingControllersToSpec } from "routing-controllers-openapi";
-import { Singleton } from "typescript-ioc";
+import { validationMetadatasToSchemas } from 'class-validator-jsonschema'
+import { getMetadataArgsStorage } from 'routing-controllers'
+import { routingControllersToSpec } from 'routing-controllers-openapi'
+import { Singleton } from 'typescript-ioc'
 
-type OpenAPIObject = ReturnType<typeof validationMetadatasToSchemas>;
+type OpenAPIObject = ReturnType<typeof validationMetadatasToSchemas>
 
 function generateApiSpec() {
-  const storage = getMetadataArgsStorage();
+  const storage = getMetadataArgsStorage()
   const schemas = validationMetadatasToSchemas({
-    refPointerPrefix: "#/components/schemas",
-  });
+    refPointerPrefix: '#/components/schemas',
+  })
   const spec = routingControllersToSpec(storage, undefined, {
     components: { schemas },
     info: {
-      title:
-        "A test API with routing-controllers, openapi, zapatos and migrate. Go typescript!",
-      version: "0.0.1",
+      title: 'A test API with routing-controllers, openapi, zapatos and migrate. Go typescript!',
+      version: '0.0.1',
     },
-  });
+  })
 
-  return spec;
+  return spec
 }
 
 @Singleton
 export class OpenAPIService {
-  spec?: OpenAPIObject;
+  spec?: OpenAPIObject
 
   public getSpec(): OpenAPIObject {
     if (!this.spec) {
-      this.spec = generateApiSpec();
+      this.spec = generateApiSpec()
     }
 
-    return this.spec;
+    return this.spec
   }
 }
