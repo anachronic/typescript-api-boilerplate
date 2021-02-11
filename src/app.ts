@@ -17,4 +17,8 @@ if (process.env.NODE_ENV !== 'test') {
   // Don't user request logger in test
   app.use(morgan('combined', { stream: new WinstonStream() }))
 }
+
+if (process.env.NODE_ENV !== 'production') {
+  const opeanApiService: OpenAPIService = Container.get(OpenAPIService)
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(opeanApiService.getSpec()))
 }
