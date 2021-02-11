@@ -10,4 +10,7 @@ export const app = createExpressServer({
   middlewares: [`${__dirname}/middleware/**/*.{js,ts}`],
 });
 
-app.use(morgan("combined", { stream: new WinstonStream() }));
+if (process.env.NODE_ENV !== "test") {
+  // Don't user request logger in test
+  app.use(morgan("combined", { stream: new WinstonStream() }));
+}
