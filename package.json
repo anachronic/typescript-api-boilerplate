@@ -14,7 +14,7 @@
   },
   "dependencies": {
     "@types/pg": "^7.14.9",
-    "class-transformer": "^0.3.2",
+    "class-transformer": "0.3.1",
     "class-validator": "^0.13.1",
     "class-validator-jsonschema": "^2.1.1",
     "env-sanitize": "^2.0.0",
