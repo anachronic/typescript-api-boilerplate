@@ -1,17 +1,11 @@
-import { Request, Response } from 'express'
-import {
-  ExpressErrorMiddlewareInterface as ErrorMiddleware,
-  HttpError,
-  Middleware,
-} from 'routing-controllers'
-import { InjectValue } from 'typescript-ioc'
-import { Logger } from 'winston'
+import { HttpError, KoaMiddlewareInterface, Middleware } from 'routing-controllers'
+import { Context, Next } from 'koa'
+import log4js from 'koa-log4'
 
-@Middleware({ type: 'after', priority: 0 })
-export class ErrorHandlingMiddleware implements ErrorMiddleware {
-  @InjectValue('logger')
-  private logger: Logger
+const logger = log4js.getLogger('error-handler')
 
+@Middleware({ type: 'before', priority: 1000000000 })
+export class ErrorHandlingMiddleware implements KoaMiddlewareInterface {
   private processJsonError(error: any) {
     if (typeof error.toJSON === 'function') return error.toJSON()
 
@@ -40,16 +34,19 @@ export class ErrorHandlingMiddleware implements ErrorMiddleware {
     return error
   }
 
-  error(error: any, request: Request, response: Response): void {
-    if (error.httpCode) {
-      response.status(error.httpCode)
-    } else {
-      response.status(500)
+  async use(context: Context, next: Next) {
+    try {
+      await next()
+    } catch (error) {
+      if (error.httpCode) {
+        context.response.status = error.httpCode
+      } else {
+        context.response.status = 500
+      }
+
+      // send error content
+      context.body = this.processJsonError(error)
+      logger.error('Exception thrown:\n', error)
     }
-
-    // send error content
-    response.json(this.processJsonError(error))
-
-    throw error
   }
 }

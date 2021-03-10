@@ -1,24 +1,19 @@
-import './startup'
+import Koa from 'koa'
+import { useKoaServer } from 'routing-controllers'
+import { bootstrapContainer } from './bootstrap/container'
+import { bootstrapLogging } from './bootstrap/logging'
+import { bootstrapSwaggerUi } from './bootstrap/swagger-ui'
 
-import morgan from 'morgan'
-import { createExpressServer } from 'routing-controllers'
-import { WinstonStream } from './logging'
-import swaggerUi from 'swagger-ui-express'
-import { OpenAPIService } from './schema'
-import { Container } from 'typescript-ioc'
+bootstrapContainer()
 
-export const app = createExpressServer({
+export const app: Koa = new Koa()
+
+bootstrapLogging(app)
+
+useKoaServer(app, {
   defaultErrorHandler: false,
   controllers: [`${__dirname}/controllers/**/*.{js,ts}`],
   middlewares: [`${__dirname}/middleware/**/*.{js,ts}`],
 })
 
-if (process.env.NODE_ENV !== 'test') {
-  // Don't user request logger in test
-  app.use(morgan('combined', { stream: new WinstonStream() }))
-}
-
-if (process.env.NODE_ENV !== 'production') {
-  const opeanApiService: OpenAPIService = Container.get(OpenAPIService)
-  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(opeanApiService.getSpec()))
-}
+bootstrapSwaggerUi(app)

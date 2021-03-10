@@ -1,13 +1,21 @@
 const marv = require('marv/api/promise')
 const driver = require('marv-pg-driver')
-const env = require('env-sanitize')
+const { cleanEnv, str, num } = require('envalid')
+
+export const env = cleanEnv(process.env, {
+  DATABASE_HOST: str(),
+  DATABASE_PORT: num(),
+  DATABASE_USER: str(),
+  DATABASE_PASSWORD: str(),
+  DATABASE_NAME: str(),
+})
 
 const connection = {
-  host: env('DATABASE_HOST'),
-  port: env('DATABASE_PORT', (p) => p.asInt()),
-  user: env('DATABASE_USER'),
-  password: env('DATABASE_PASSWORD'),
-  database: env('DATABASE_NAME'),
+  host: env.DATABASE_HOST,
+  port: env.DATABASE_PORT,
+  user: env.DATABASE_USER,
+  password: env.DATABASE_PASSWORD,
+  database: env.DATABASE_NAME,
 }
 
 async function migrate() {
