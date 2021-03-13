@@ -2,7 +2,7 @@ const marv = require('marv/api/promise')
 const driver = require('marv-pg-driver')
 const { cleanEnv, str, num } = require('envalid')
 
-export const env = cleanEnv(process.env, {
+const env = cleanEnv(process.env, {
   DATABASE_HOST: str(),
   DATABASE_PORT: num(),
   DATABASE_USER: str(),
