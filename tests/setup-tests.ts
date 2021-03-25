@@ -1,13 +1,9 @@
 import { Container } from 'typescript-ioc'
 import * as db from 'zapatos/db'
 import { pool } from '../src/database'
-import log4js from 'koa-log4'
 
 beforeAll(() => {
   Container.bindName('_pool').to(pool)
-
-  // disable loggers
-  log4js.getLogger().level = 'off'
 })
 
 afterAll(async () => {

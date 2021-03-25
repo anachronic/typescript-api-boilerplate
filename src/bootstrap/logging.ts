@@ -1,14 +1,22 @@
 import Koa from 'koa'
-import log4js from 'koa-log4'
-import { settings } from '../conf/settings'
+import koaPinoLogger from 'koa-pino-logger'
+import { getLogger } from '../logger'
 
-export function bootstrapLogging(app: Koa) {
-  const logger = log4js.getLogger()
-  logger.level = settings.isDev ? 'info' : 'debug'
+export function bootstrapLogging(app?: Koa) {
+  if (app) {
+    app.use(
+      koaPinoLogger({
+        logger: getLogger('http'),
+        customLogLevel: (res) => {
+          if (res.statusCode >= 500) {
+            return 'error'
+          } else if (res.statusCode >= 400) {
+            return 'warn'
+          }
 
-  app.use(
-    log4js.koaLogger(log4js.getLogger('http'), {
-      level: 'auto',
-    })
-  )
+          return 'info'
+        },
+      })
+    )
+  }
 }

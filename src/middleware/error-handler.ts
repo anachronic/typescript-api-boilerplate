@@ -1,8 +1,5 @@
 import { HttpError, KoaMiddlewareInterface, Middleware } from 'routing-controllers'
 import { Context, Next } from 'koa'
-import log4js from 'koa-log4'
-
-const logger = log4js.getLogger('error-handler')
 
 @Middleware({ type: 'before', priority: 1000000000 })
 export class ErrorHandlingMiddleware implements KoaMiddlewareInterface {
@@ -46,7 +43,6 @@ export class ErrorHandlingMiddleware implements KoaMiddlewareInterface {
 
       // send error content
       context.body = this.processJsonError(error)
-      logger.error('Exception thrown:\n', error)
     }
   }
 }
