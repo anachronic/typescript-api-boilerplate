@@ -2,5 +2,5 @@
     "watch": ["src/**/*.ts"],
     "ext": "ts",
     "ignore": ["src/**/*.spec.ts"],
-    "exec": "tsc && node ./build/index.js"
+    "exec": "yarn build && node ./build/index.js"
 }

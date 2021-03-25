@@ -3,7 +3,7 @@
 if [ "$DEBUG" = "true" ]
 then
     yarn install
-    yarn dev
+    exec yarn dev
 else
-    yarn start
+    exec yarn start
 fi
