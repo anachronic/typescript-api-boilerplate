@@ -6,7 +6,7 @@ import { bootstrapSwaggerUi } from './bootstrap/swagger-ui'
 
 bootstrapContainer()
 
-export const app: Koa = new Koa()
+const app: Koa = new Koa()
 
 bootstrapLogging(app)
 
@@ -17,3 +17,5 @@ useKoaServer(app, {
 })
 
 bootstrapSwaggerUi(app)
+
+export { app }
