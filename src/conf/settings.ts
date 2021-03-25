@@ -14,7 +14,7 @@ export const settings = cleanEnv(process.env, {
   // mailing with mailgun
   MAILGUN_API_KEY: str({ devDefault: 'fake mailgun api key ;)' }),
   MAILGUN_DOMAIN: str({ devDefault: 'fake mailgun domain ;)' }),
-  MAIL_FROM: str({ default: 'PanelUp <no-reply@plataformatelar.cl>' }),
+  MAIL_FROM: str({ default: 'Super app <no-reply@example.com>' }),
 
   // Redis
   REDIS_HOST: str({ devDefault: 'redis' }),
