@@ -172,9 +172,12 @@ However, you could easily change the production entrypoint to use something like
 ## Roadmap
 
 - [ ] Integrate koa sessions
+- [ ] Rewrite error handler
 - [ ] Add github actions to test that this template actually works
 - [ ] Figure out if `yarn test --watchAll` works or not
 - [ ] Check out alternatives because routing controllers is dropping Koa (#1)
+- [ ] Write even better docs
+- [ ] Possibly turn it into a framework instead of a boilerplate
 - [ ] Maybe make a template out of this
 
 ## Questions or anything else
